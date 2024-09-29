@@ -7,13 +7,13 @@ public class TextModifier {
         Scanner sc = new Scanner(System.in);
         System.out.println("Line input is required");
         String str = sc.nextLine();
-     //   String str = "0-+       22+Te-st  pharse   efd-1    +        we = pum0 -  pum       -7";
+     //   String str = "0-+       22+Te-st  parse   efd-1    +        we = pum0 -  pum       -7";
 
         char[] ch = new char[str.length()];
         for (int i = 0; i < str.length(); i++) {
             ch[i] = str.charAt(i);
         }
-/*
+/* Ver.0.2
 System.out.println("Original string is");
         for (short i = 0; i < str.length(); i++) System.out.print(ch[i]);
         System.out.println();
@@ -33,11 +33,11 @@ System.out.println("Original string is");
               }
              i--;
              TextLength--;
-             ch[(str.length()-1)] = '!';
+             ch[(str.length()-1)] = 'X';
             }
         }
         // output part 1
-        /*System.out.println("Dublicated spaces have been removed");
+        /*System.out.println("Duplicated spaces have been removed");
         for (short i = 0; i < TextLength; i++) System.out.print(ch[i]);
         System.out.println();
         System.out.println("next step");
@@ -52,17 +52,18 @@ System.out.println("Original string is");
                 ch[i-1] = ch [i+1];
                 ch [i+1] = buffer;
                 // '-' remove
-                for (int ii = (i); ii < TextLength; ii++)
+                for (int ii = (i); ii < (TextLength-1); ii++)
                 {
                     ch[ii] = ch[ii + 1];
 
                 }
                 i--;
                 TextLength--;
-                ch[(str.length()-1)] = '@';
+               ch[(str.length()-1)] = '@';
             }
         }
-        // output part 2. In case firts&last '-' this part have no changes
+
+        // output part 2. In case first&last '-' this part have no changes
   /*      System.out.println("'Minus' modifier");
         for (short i = 0; i < TextLength; i++) System.out.print(ch[i]);
         System.out.println();
@@ -79,9 +80,9 @@ System.out.println("Original string is");
         for (short i = 0; i < TextLength; i++) System.out.print(ch[i]);
         System.out.println();
         System.out.println("next step");*/
-// Part 4. Figures finding and sum
+//Part 4. Figures finding and sum
         int sum = 0;
-        int num = 0;
+        int num;
 
         for (int i = 0; i < (TextLength); i++)
         {
@@ -94,16 +95,18 @@ System.out.println("Original string is");
                  // System.out.println("Sum is " + sum);
 
                  // Figure remove
-                for (int ii = (i); ii < TextLength; ii++)
+                for (int ii = (i); ii < (TextLength-1); ii++)
                 {
                     ch[ii] = ch[ii + 1];
 
                 }
                 i--;
                  TextLength--;
-                ch[(str.length()-1)] = '$';
+               ch[(str.length()-1)] = '$';
             }
         }
+
+
         // output part 4
         System.out.println("The result is");
         for (short i = 0; i < TextLength; i++) System.out.print(ch[i]);
@@ -117,6 +120,5 @@ System.out.println("Original string is");
 
 
 
-//System.out.println("String lenght = "+str.length());
 
 
