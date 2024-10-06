@@ -103,7 +103,7 @@ public static int intFormat (String strIn)
             }
         strInUpd = strInUpd.substring(3, strInUpd.length());
         System.out.println("Line in without first sentence and operator is " + strInUpd);
-//Сложение
+            //Сложение
             if (op.equals(" + "))
             {
                 String str2 = strFormat(strInUpd);
@@ -115,6 +115,7 @@ public static int intFormat (String strIn)
                 }
                 result = sum(str1, str2);
             }
+            //Вычитание
         if (op.equals(" - "))
         {
             String str2 = strFormat(strInUpd);
@@ -126,28 +127,19 @@ public static int intFormat (String strIn)
             }
             result = minus(str1, str2);
         }
+        //Умножение
         if (op.equals(" * "))
         {
             multiplicator  = intFormat(strInUpd);
             result = multiply(str1,multiplicator);
         }
+        //Деление
         if (op.equals(" / "))
         {
             multiplicator  = intFormat(strInUpd);
             result = div(str1,multiplicator);
         }
 
-
-                /*
-        result = Calc.sum(test1,test2);
-        System.out.println(result);
-        result = Calc.minus(test1,test2);
-        System.out.println(result);
-        result = Calc.multiply(test1,a);
-        System.out.println(result);
-        result = Calc.div(test1,a);
-        System.out.println(result);
-        */
         if (result.length()>40) result = (result.substring(0,39) + "...");
         System.out.println(" The result is below");
         System.out.println(result);
