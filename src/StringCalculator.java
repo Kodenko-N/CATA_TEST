@@ -72,6 +72,12 @@ public static int intFormat (String strIn)
         System.out.println("Second substring is not figure");
         System.exit(0);
     }
+    if (a<1 || a>10)
+    {
+        System.out.println("Figure is out of range");
+        System.exit(0);
+
+    }
     return (a);
 }
 
