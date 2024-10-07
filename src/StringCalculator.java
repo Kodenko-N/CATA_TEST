@@ -9,7 +9,7 @@ public class StringCalculator
 
         public static String minus (String str1, String str2) //Вычитание
         {
-            String res = str1.replace(str2, "");
+            String res = str1.replaceFirst(str2, "");
             return res;
         }
 
@@ -38,25 +38,24 @@ public class StringCalculator
             System.exit(0);
         }
 
-        for (int i = 2; i < (strIn.length()) ; i++)
+        for (int i = 1; i < (strIn.length()) ; i++)
         {
             if (strIn.charAt(i) == '"')
             {
                 str = strIn.substring(1, i);
                 System.out.println("Substring is \"" + str + "\"");
-                return (str);
+                if (str.length()>10) // Проверка длины
+                {
+                    System.out.println("Wrong input, sentence is over 10 symbols");
+                    System.exit(0);
+                }
+                return(str);
             }
         }
 
         if (str == "")
         {
             System.out.println("Wrong input. First sentence not found");
-            System.exit(0);
-        }
-
-        if (str.length()>10) // Проверка длины
-        {
-            System.out.println("Wrong input, first sentence is over 10 symbols");
             System.exit(0);
         }
         return(str);
@@ -92,52 +91,57 @@ public static int intFormat (String strIn)
         String str1 = strFormat(strInUpd);
 
         strInUpd = strInUpd.substring((str1.length()+2), strInUpd.length());
-        System.out.println("Line in without first sentence is " + strInUpd);
+        //System.out.println("Line in without first sentence is " + strInUpd);
+        //Проверка остаточной длины строки
+        if (strInUpd.length()<4)
+        {
+            System.out.println("Line in without first sentence is too short");
+            System.exit(0);
+        }
 
 //выделение оператора
         String op = strInUpd.substring(0, 3);
-        System.out.println("the oprator is \"" + op + "\"");
-            if (op != " + " ^ op != " - " ^ op != " * " ^ op != " / ") {
-                System.out.println(" Wrong operator");
-                System.exit(0);
-            }
-        strInUpd = strInUpd.substring(3, strInUpd.length());
-        System.out.println("Line in without first sentence and operator is " + strInUpd);
+
+        if (op.equals(" + ") || op.equals(" - ") || op.equals(" * ") || op.equals(" / "))
+        {
+            System.out.println("the oprator is \"" + op + "\"");
+            strInUpd = strInUpd.substring(3, strInUpd.length());
+           // System.out.println("Line in without first sentence and operator is " + strInUpd);
             //Сложение
-            if (op.equals(" + "))
-            {
+            if (op.equals(" + ")) {
                 String str2 = strFormat(strInUpd);
-                strInUpd = strInUpd.substring(str2.length()+2, strInUpd.length());
-                if (strInUpd != "")
-                {
+                strInUpd = strInUpd.substring(str2.length() + 2, strInUpd.length());
+                if (strInUpd != "") {
                     System.out.println("Second line input is wrong");
                     System.exit(0);
                 }
                 result = sum(str1, str2);
             }
             //Вычитание
-        if (op.equals(" - "))
-        {
-            String str2 = strFormat(strInUpd);
-            strInUpd = strInUpd.substring(str2.length()+2, strInUpd.length());
-            if (strInUpd != "")
-            {
-                System.out.println("Second sentence input is wrong");
-                System.exit(0);
+            if (op.equals(" - ")) {
+                String str2 = strFormat(strInUpd);
+                strInUpd = strInUpd.substring(str2.length() + 2, strInUpd.length());
+                if (strInUpd != "") {
+                    System.out.println("Second sentence input is wrong");
+                    System.exit(0);
+                }
+                result = minus(str1, str2);
             }
-            result = minus(str1, str2);
+            //Умножение
+            if (op.equals(" * ")) {
+                multiplicator = intFormat(strInUpd);
+                result = multiply(str1, multiplicator);
+            }
+            //Деление
+            if (op.equals(" / ")) {
+                multiplicator = intFormat(strInUpd);
+                result = div(str1, multiplicator);
+            }
         }
-        //Умножение
-        if (op.equals(" * "))
+        else
         {
-            multiplicator  = intFormat(strInUpd);
-            result = multiply(str1,multiplicator);
-        }
-        //Деление
-        if (op.equals(" / "))
-        {
-            multiplicator  = intFormat(strInUpd);
-            result = div(str1,multiplicator);
+        System.out.println(" Wrong operator");
+        System.exit(0);
         }
 
         if (result.length()>40) result = (result.substring(0,40) + "...");
