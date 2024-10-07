@@ -86,12 +86,6 @@ public static int intFormat (String strIn)
         Scanner sc = new Scanner(System.in);
         System.out.println("Line input is required");
         String input = sc.nextLine();
-
-       // String input = "\"0qwerzx12340\" / 2";
-       // System.out.println("Input line is");
-        //System.out.println(input);
-
-
         String strInUpd = input;
         String result = " something going wrong ";
         int multiplicator = 1;
@@ -146,7 +140,7 @@ public static int intFormat (String strIn)
             result = div(str1,multiplicator);
         }
 
-        if (result.length()>40) result = (result.substring(0,39) + "...");
+        if (result.length()>40) result = (result.substring(0,40) + "...");
         System.out.println(" The result is below");
         System.out.println(result);
     }
