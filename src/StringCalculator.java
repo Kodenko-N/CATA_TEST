@@ -1,6 +1,9 @@
-//Version 0.2
+//Version 0.3
 
 import java.util.Scanner;
+
+
+
 public class StringCalculator
 {
         public static String sum (String str1, String str2) //Сложение
@@ -34,10 +37,17 @@ public class StringCalculator
     public static String strFormat(String strIn) //Выделение части строки в кавычках, начиная с 0 символа
     {
         String str = "";
-        if (strIn.charAt(0)!='"' ) //Проверка первых кавычек
+        if (strIn=="") //Проверка ввода пустой строки
+        {
+            System.out.println("Zero input");
+            //System.exit(0);
+            throw new IllegalArgumentException();
+        }
+        if (strIn.charAt(0)!='"') //Проверка первых кавычек
         {
             System.out.println("Wrong input, first symbol must be \" ");
-            System.exit(0);
+            //System.exit(0);
+            throw new IllegalArgumentException();
         }
 
         for (int i = 1; i < (strIn.length()) ; i++)
@@ -50,15 +60,17 @@ public class StringCalculator
                 {
                     System.out.println("Wrong input, sentence is over 10 symbols");
                     System.exit(0);
+
                 }
                 return(str);
             }
         }
 
-        if (str == "")
+        if (str.equals (""))
         {
             System.out.println("Wrong input. First sentence not found");
-            System.exit(0);
+            //System.exit(0);
+            throw new IllegalArgumentException();
         }
         return(str);
     }
@@ -67,16 +79,19 @@ public static int intFormat (String strIn)
     int a = 1;
     try {
         a = Integer.parseInt(strIn);
+        System.out.println("Multiplicator is " + a);
     }
     catch (NumberFormatException e)
     {
-        System.out.println("Second substring is not figure");
-        System.exit(0);
+        System.out.println("Second substring is not an integer figure");
+        // System.exit(0);
+        throw new IllegalArgumentException();
     }
     if (a<1 || a>10)
     {
         System.out.println("Figure is out of range");
         System.exit(0);
+        throw new IllegalArgumentException();
 
     }
     return (a);
@@ -97,8 +112,9 @@ public static int intFormat (String strIn)
         //Проверка остаточной длины строки
         if (strInUpd.length()<4)
         {
-            System.out.println("Line in without first sentence is too short");
-            System.exit(0);
+            System.out.println("Line without first sentence is too short");
+            //System.exit(0);
+            throw new IllegalArgumentException();
         }
 
 //выделение оператора
@@ -113,7 +129,7 @@ public static int intFormat (String strIn)
             if (op.equals(" + ")) {
                 String str2 = strFormat(strInUpd);
                 strInUpd = strInUpd.substring(str2.length() + 2, strInUpd.length());
-                if (strInUpd != "") {
+                if (!strInUpd.equals("")) {
                     System.out.println("Second line input is wrong");
                     System.exit(0);
                 }
@@ -123,7 +139,7 @@ public static int intFormat (String strIn)
             if (op.equals(" - ")) {
                 String str2 = strFormat(strInUpd);
                 strInUpd = strInUpd.substring(str2.length() + 2, strInUpd.length());
-                if (strInUpd != "") {
+                if (!strInUpd.equals("")) {
                     System.out.println("Second sentence input is wrong");
                     System.exit(0);
                 }
@@ -143,10 +159,11 @@ public static int intFormat (String strIn)
         else
         {
         System.out.println(" Wrong operator");
-        System.exit(0);
+        // System.exit(0);
+        throw new IllegalArgumentException();
         }
 
-        if (result.length()>40) result = (result.substring(0,40) + "...");
+        if (result.length()>41) result = (result.substring(0,40) + "...");
         System.out.println(" The result is below");
         System.out.println(result);
     }
